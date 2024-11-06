@@ -1,11 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 
 export default function App() {
+  const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    setCurrentTime(`${hours}:${minutes}`);
+  }, []);
+
+  const fullName = "Gabriel Carvalho";
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.text}>Olá, {fullName}! Agora são {currentTime}.</Text>
     </View>
   );
 }
@@ -13,8 +23,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  text: {
+    fontSize: 20,
+    color: '#333',
   },
 });
+
